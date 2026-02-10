@@ -1,8 +1,10 @@
-#include <j1939/Decode.hpp>
+#include <nmea2000/Decode.hpp>
+#include <j1939/J1939Receiver.hpp>
 #include <j1939/PGNs.hpp>
 
 using namespace j1939;
-using namespace decode;
+using namespace pgns;
+using namespace nmea2000::decode;
 
 EletronicEngineController1 EletronicEngineController1::fromMessage(Message const& message)
 {
@@ -218,4 +220,28 @@ TransportProtocolConnectionManagement TransportProtocolConnectionManagement::fro
     result.pgn = (decode32(&message.payload[5])) & 0x00FFFFFF;
 
     return result;
+}
+
+nmea2000::PGNLibrary const& j1939::pgns::getLibrary()
+{
+    static nmea2000::PGNLibrary library;
+
+    if (library.empty()) {
+        std::vector<nmea2000::PGNInfo> known_pgns;
+        known_pgns.reserve(10);
+        known_pgns.push_back({61444, 8});
+        known_pgns.push_back({61445, 8});
+        known_pgns.push_back({65266, 8});
+        known_pgns.push_back({65263, 8});
+        known_pgns.push_back({65243, 8});
+        known_pgns.push_back({65270, 8});
+        known_pgns.push_back({60416, 8});
+        known_pgns.push_back({65253, 8});
+        known_pgns.push_back({65271, 8});
+        known_pgns.push_back({65262, 8});
+
+        library = nmea2000::PGNLibrary(known_pgns);
+    }
+
+    return library;
 }
