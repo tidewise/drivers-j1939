@@ -2,6 +2,7 @@
 #include <j1939/PGNs.hpp>
 
 using namespace j1939;
+using namespace pgns;
 using namespace std;
 
 struct PGNsTest : public ::testing::Test {};
