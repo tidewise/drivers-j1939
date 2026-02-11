@@ -11,21 +11,10 @@ namespace j1939 {
      */
     struct TransportState {
         /**
-         * @brief Maximum transport protocol message size
+         * @brief The message to be reassembled
          *
          */
-        static const int MAX_TP_SIZE = 1785;
-
-        /**
-         * @brief The PGN of the reassembled messsage
-         *
-         */
-        uint32_t pgn = 0;
-        /**
-         * @brief The message size in bytes
-         *
-         */
-        uint16_t total_data_size = 0;
+        nmea2000::Message message;
         /**
          * @brief The number of expected packets
          *
@@ -37,12 +26,6 @@ namespace j1939 {
          *
          */
         size_t current_data_size = 0;
-        /**
-         * @brief The data buffer
-         *
-         */
-        uint8_t data[MAX_TP_SIZE];
-
         /**
          * @brief Initiates a TransportState from a Broadcast Announcement Message (BAM)
          *
