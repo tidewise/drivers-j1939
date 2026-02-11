@@ -2,7 +2,6 @@
 #include <cstring>
 #include <nmea2000/Decode.hpp>
 #include <j1939/Helpers.hpp>
-#include <j1939/TransportState.hpp>
 
 using namespace j1939;
 using namespace nmea2000;
