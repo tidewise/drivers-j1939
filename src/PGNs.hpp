@@ -10,8 +10,8 @@ namespace j1939 {
         nmea2000::PGNLibrary const& getLibrary();
 
         struct EletronicEngineController1 {
-            static const int BYTE_LENGTH = 8;
-            static const int ID = 61444;
+            static constexpr int BYTE_LENGTH = 8;
+            static constexpr int ID = 61444;
 
             static EletronicEngineController1 fromMessage(
                 nmea2000::Message const& message);
@@ -31,8 +31,8 @@ namespace j1939 {
             uint8_t engine_demand;
         };
         struct EletronicEngineController2 {
-            static const int BYTE_LENGTH = 8;
-            static const int ID = 61445;
+            static constexpr int BYTE_LENGTH = 8;
+            static constexpr int ID = 61445;
 
             static EletronicEngineController2 fromMessage(
                 nmea2000::Message const& message);
@@ -46,8 +46,8 @@ namespace j1939 {
             uint16_t transmission_current_range;
         };
         struct FuelEconomy {
-            static const int BYTE_LENGTH = 8;
-            static const int ID = 65266;
+            static constexpr int BYTE_LENGTH = 8;
+            static constexpr int ID = 65266;
 
             static FuelEconomy fromMessage(nmea2000::Message const& message);
 
@@ -61,8 +61,8 @@ namespace j1939 {
             uint8_t throttle_position_2;
         };
         struct EngineFluidLevelAndPressure1 {
-            static const int BYTE_LENGTH = 8;
-            static const int ID = 65263;
+            static constexpr int BYTE_LENGTH = 8;
+            static constexpr int ID = 65263;
 
             static EngineFluidLevelAndPressure1 fromMessage(
                 nmea2000::Message const& message);
@@ -78,8 +78,8 @@ namespace j1939 {
             uint8_t coolant_level;
         };
         struct EngineFluidLevelAndPressure2 {
-            static const int BYTE_LENGTH = 8;
-            static const int ID = 65243;
+            static constexpr int BYTE_LENGTH = 8;
+            static constexpr int ID = 65243;
 
             static EngineFluidLevelAndPressure2 fromMessage(
                 nmea2000::Message const& message);
@@ -92,8 +92,8 @@ namespace j1939 {
             uint16_t injector_metering_rail_2_pressure;
         };
         struct InletConditions {
-            static const int BYTE_LENGTH = 8;
-            static const int ID = 65270;
+            static constexpr int BYTE_LENGTH = 8;
+            static constexpr int ID = 65270;
 
             static InletConditions fromMessage(nmea2000::Message const& message);
 
@@ -108,8 +108,8 @@ namespace j1939 {
             uint8_t coolant_filter_differential_pressure;
         };
         struct TransportProtocolConnectionManagement {
-            static const int BYTE_LENGTH = 8;
-            static const int ID = 60416;
+            static constexpr int BYTE_LENGTH = 8;
+            static constexpr int ID = 60416;
 
             static TransportProtocolConnectionManagement fromMessage(
                 nmea2000::Message const& message);
@@ -125,8 +125,8 @@ namespace j1939 {
             uint32_t pgn;
         };
         struct EngineHoursAndRevolutions {
-            static const int BYTE_LENGTH = 8;
-            static const int ID = 65253;
+            static constexpr int BYTE_LENGTH = 8;
+            static constexpr int ID = 65253;
 
             static EngineHoursAndRevolutions fromMessage(
                 nmea2000::Message const& message);
@@ -137,8 +137,8 @@ namespace j1939 {
             uint32_t total_engine_revolutions;
         };
         struct VehicleElectricalPower1 {
-            static const int BYTE_LENGTH = 8;
-            static const int ID = 65271;
+            static constexpr int BYTE_LENGTH = 8;
+            static constexpr int ID = 65271;
 
             static VehicleElectricalPower1 fromMessage(nmea2000::Message const& message);
 
@@ -151,8 +151,8 @@ namespace j1939 {
             uint16_t battery_potential;
         };
         struct EngineTemperature1 {
-            static const int BYTE_LENGTH = 8;
-            static const int ID = 65262;
+            static constexpr int BYTE_LENGTH = 8;
+            static constexpr int ID = 65262;
 
             static EngineTemperature1 fromMessage(nmea2000::Message const& message);
 
