@@ -4,6 +4,7 @@
 using namespace j1939;
 using namespace pgns;
 using namespace std;
+using namespace nmea2000;
 
 struct PGNsTest : public ::testing::Test {};
 

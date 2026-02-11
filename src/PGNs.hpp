@@ -1,8 +1,8 @@
 #ifndef J1939_PGNS_HPP
 #define J1939_PGNS_HPP
 
-#include "Message.hpp"
 #include <nmea2000/PGNLibrary.hpp>
+#include <nmea2000/Message.hpp>
 
 namespace j1939 {
     namespace pgns {
@@ -13,7 +13,8 @@ namespace j1939 {
             static const int BYTE_LENGTH = 8;
             static const int ID = 61444;
 
-            static EletronicEngineController1 fromMessage(Message const& message);
+            static EletronicEngineController1 fromMessage(
+                nmea2000::Message const& message);
 
             base::Time time;
 
@@ -33,7 +34,8 @@ namespace j1939 {
             static const int BYTE_LENGTH = 8;
             static const int ID = 61445;
 
-            static EletronicEngineController2 fromMessage(Message const& message);
+            static EletronicEngineController2 fromMessage(
+                nmea2000::Message const& message);
 
             base::Time time;
 
@@ -47,7 +49,7 @@ namespace j1939 {
             static const int BYTE_LENGTH = 8;
             static const int ID = 65266;
 
-            static FuelEconomy fromMessage(Message const& message);
+            static FuelEconomy fromMessage(nmea2000::Message const& message);
 
             base::Time time;
 
@@ -62,7 +64,8 @@ namespace j1939 {
             static const int BYTE_LENGTH = 8;
             static const int ID = 65263;
 
-            static EngineFluidLevelAndPressure1 fromMessage(Message const& message);
+            static EngineFluidLevelAndPressure1 fromMessage(
+                nmea2000::Message const& message);
 
             base::Time time;
 
@@ -78,7 +81,8 @@ namespace j1939 {
             static const int BYTE_LENGTH = 8;
             static const int ID = 65243;
 
-            static EngineFluidLevelAndPressure2 fromMessage(Message const& message);
+            static EngineFluidLevelAndPressure2 fromMessage(
+                nmea2000::Message const& message);
 
             base::Time time;
 
@@ -91,7 +95,7 @@ namespace j1939 {
             static const int BYTE_LENGTH = 8;
             static const int ID = 65270;
 
-            static InletConditions fromMessage(Message const& message);
+            static InletConditions fromMessage(nmea2000::Message const& message);
 
             base::Time time;
 
@@ -108,13 +112,13 @@ namespace j1939 {
             static const int ID = 60416;
 
             static TransportProtocolConnectionManagement fromMessage(
-                Message const& message);
+                nmea2000::Message const& message);
 
             base::Time time;
 
             // TODO bam or control_byte?
             uint8_t control_byte;
-            // Message size (bytes)
+            // nmea2000::Message size (bytes)
             uint16_t message_size;
             uint8_t number_of_packets;
             uint8_t reserved;
@@ -124,7 +128,8 @@ namespace j1939 {
             static const int BYTE_LENGTH = 8;
             static const int ID = 65253;
 
-            static EngineHoursAndRevolutions fromMessage(Message const& message);
+            static EngineHoursAndRevolutions fromMessage(
+                nmea2000::Message const& message);
 
             base::Time time;
 
@@ -135,7 +140,7 @@ namespace j1939 {
             static const int BYTE_LENGTH = 8;
             static const int ID = 65271;
 
-            static VehicleElectricalPower1 fromMessage(Message const& message);
+            static VehicleElectricalPower1 fromMessage(nmea2000::Message const& message);
 
             base::Time time;
 
@@ -149,7 +154,7 @@ namespace j1939 {
             static const int BYTE_LENGTH = 8;
             static const int ID = 65262;
 
-            static EngineTemperature1 fromMessage(Message const& message);
+            static EngineTemperature1 fromMessage(nmea2000::Message const& message);
 
             base::Time time;
 

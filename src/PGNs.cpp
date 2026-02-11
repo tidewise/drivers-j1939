@@ -5,6 +5,7 @@
 using namespace j1939;
 using namespace pgns;
 using namespace nmea2000::decode;
+using namespace nmea2000;
 
 EletronicEngineController1 EletronicEngineController1::fromMessage(Message const& message)
 {
