@@ -30,10 +30,10 @@ nmea2000::Receiver::State TransportState::add(nmea2000::Message const& incoming_
         throw invalid_argument("Expected message to be a Data Transfer message (DT)");
     }
     uint8_t sequence_counter = decode8(&incoming_msg.payload[0]);
+    current_packets_count += 1;
     if (sequence_counter != current_packets_count) {
         return Receiver::State::INVALID_SEQUENCE_NUMBER;
     }
-    current_packets_count += 1;
     bool last_message = (sequence_counter == number_of_packets);
     size_t incoming_size =
         last_message ? message.size - current_data_size : message.size - 1;
