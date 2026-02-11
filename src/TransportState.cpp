@@ -36,7 +36,7 @@ nmea2000::Receiver::State TransportState::add(nmea2000::Message const& incoming_
     }
     bool last_message = (sequence_counter == number_of_packets);
     size_t incoming_size =
-        last_message ? message.size - current_data_size : message.size - 1;
+        last_message ? message.size - current_data_size : incoming_msg.size - 1;
     memcpy(message.payload + current_data_size, incoming_msg.payload + 1, incoming_size);
     current_data_size += incoming_size;
     message.time = base::Time::now();
