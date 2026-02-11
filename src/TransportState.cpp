@@ -7,7 +7,6 @@
 using namespace j1939;
 using namespace nmea2000;
 using namespace nmea2000::decode;
-using namespace decode;
 using namespace std;
 
 void TransportState::fromBAMMessage(nmea2000::Message const& bam_message)

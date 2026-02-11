@@ -1,19 +1,19 @@
 #ifndef J1939_PGNS_HPP
 #define J1939_PGNS_HPP
 
-#include <nmea2000/PGNLibrary.hpp>
 #include <nmea2000/Message.hpp>
+#include <nmea2000/PGNLibrary.hpp>
 
 namespace j1939 {
     namespace pgns {
 
         nmea2000::PGNLibrary const& getLibrary();
 
-        struct EletronicEngineController1 {
+        struct ElectronicEngineController1 {
             static constexpr int BYTE_LENGTH = 8;
             static constexpr int ID = 61444;
 
-            static EletronicEngineController1 fromMessage(
+            static ElectronicEngineController1 fromMessage(
                 nmea2000::Message const& message);
 
             base::Time time;
@@ -30,11 +30,11 @@ namespace j1939 {
             // The engine demand (percent torque)
             uint8_t engine_demand;
         };
-        struct EletronicEngineController2 {
+        struct ElectronicEngineController2 {
             static constexpr int BYTE_LENGTH = 8;
             static constexpr int ID = 61445;
 
-            static EletronicEngineController2 fromMessage(
+            static ElectronicEngineController2 fromMessage(
                 nmea2000::Message const& message);
 
             base::Time time;

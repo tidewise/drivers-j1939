@@ -15,7 +15,7 @@ M parse_message(vector<uint8_t> const& payload,
 
 TEST_F(PGNsTest, ir_parses_pgn_61444)
 {
-    auto parsed = parse_message<EletronicEngineController1>(
+    auto parsed = parse_message<ElectronicEngineController1>(
         {0x01, 0x50, 0x5A, 0x40, 0x1F, 0x0A, 0x01, 0x51});
     ASSERT_EQ(1, parsed.engine_torque_mode);
     ASSERT_EQ(80, parsed.drivers_demand_engine);
@@ -28,7 +28,7 @@ TEST_F(PGNsTest, ir_parses_pgn_61444)
 
 TEST_F(PGNsTest, ir_parses_pgn_61445)
 {
-    auto parsed = parse_message<EletronicEngineController2>(
+    auto parsed = parse_message<ElectronicEngineController2>(
         {0x07, 0x06, 0x15, 0x03, 0x28, 0x01, 0x64, 0x02});
     ASSERT_EQ(7, parsed.selected_gear);
     ASSERT_EQ(5382, parsed.actual_gear_ratio);

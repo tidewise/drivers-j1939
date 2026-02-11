@@ -17,11 +17,12 @@ template <typename PGNType> void validate_message(nmea2000::Message const& messa
     }
 }
 
-EletronicEngineController1 EletronicEngineController1::fromMessage(Message const& message)
+ElectronicEngineController1 ElectronicEngineController1::fromMessage(
+    Message const& message)
 {
-    validate_message<EletronicEngineController1>(message);
+    validate_message<ElectronicEngineController1>(message);
 
-    EletronicEngineController1 result;
+    ElectronicEngineController1 result;
     result.time = message.time;
 
     result.engine_torque_mode = (decode8(&message.payload[0]) & 0xf);
@@ -35,12 +36,13 @@ EletronicEngineController1 EletronicEngineController1::fromMessage(Message const
     return result;
 }
 
-EletronicEngineController2 EletronicEngineController2::fromMessage(Message const& message)
+ElectronicEngineController2 ElectronicEngineController2::fromMessage(
+    Message const& message)
 {
 
-    validate_message<EletronicEngineController2>(message);
+    validate_message<ElectronicEngineController2>(message);
 
-    EletronicEngineController2 result;
+    ElectronicEngineController2 result;
     result.time = message.time;
 
     result.selected_gear = decode8(&message.payload[0]);
@@ -91,7 +93,6 @@ EngineFluidLevelAndPressure2 EngineFluidLevelAndPressure2::fromMessage(
     Message const& message)
 {
     validate_message<EngineFluidLevelAndPressure2>(message);
-
 
     EngineFluidLevelAndPressure2 result;
     result.time = message.time;
