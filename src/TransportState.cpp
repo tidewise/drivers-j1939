@@ -13,7 +13,7 @@ using namespace std;
 void TransportState::fromBAMMessage(nmea2000::Message const& bam_message)
 {
     if (!isBAM(bam_message)) {
-        throw invalid_argument("Expected message to be Broadcast Announce Messag (BAM)");
+        throw invalid_argument("Expected message to be Broadcast Announce Message (BAM)");
     }
     number_of_packets = decode8(&bam_message.payload[3]);
     message = bam_message;
