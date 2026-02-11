@@ -1,20 +1,25 @@
-#include <nmea2000/Decode.hpp>
 #include <j1939/J1939Receiver.hpp>
 #include <j1939/PGNs.hpp>
+#include <nmea2000/Decode.hpp>
 
 using namespace j1939;
 using namespace pgns;
 using namespace nmea2000::decode;
 using namespace nmea2000;
 
-EletronicEngineController1 EletronicEngineController1::fromMessage(Message const& message)
+template <typename PGNType> void validate_message(nmea2000::Message const& message)
 {
-    if (message.pgn != ID) {
+    if (message.pgn != PGNType::ID) {
         throw std::invalid_argument("unexpected PGN ID");
     }
-    else if (message.size < BYTE_LENGTH) {
+    if (message.size < PGNType::BYTE_LENGTH) {
         throw std::invalid_argument("unexpected payload size");
     }
+}
+
+EletronicEngineController1 EletronicEngineController1::fromMessage(Message const& message)
+{
+    validate_message<EletronicEngineController1>(message);
 
     EletronicEngineController1 result;
     result.time = message.time;
@@ -33,12 +38,7 @@ EletronicEngineController1 EletronicEngineController1::fromMessage(Message const
 EletronicEngineController2 EletronicEngineController2::fromMessage(Message const& message)
 {
 
-    if (message.pgn != ID) {
-        throw std::invalid_argument("unexpected PGN ID");
-    }
-    else if (message.size < BYTE_LENGTH) {
-        throw std::invalid_argument("unexpected payload size");
-    }
+    validate_message<EletronicEngineController2>(message);
 
     EletronicEngineController2 result;
     result.time = message.time;
@@ -54,12 +54,7 @@ EletronicEngineController2 EletronicEngineController2::fromMessage(Message const
 
 FuelEconomy FuelEconomy::fromMessage(Message const& message)
 {
-    if (message.pgn != ID) {
-        throw std::invalid_argument("unexpected PGN ID");
-    }
-    else if (message.size < BYTE_LENGTH) {
-        throw std::invalid_argument("unexpected payload size");
-    }
+    validate_message<FuelEconomy>(message);
 
     FuelEconomy result;
     result.time = message.time;
@@ -76,12 +71,7 @@ FuelEconomy FuelEconomy::fromMessage(Message const& message)
 EngineFluidLevelAndPressure1 EngineFluidLevelAndPressure1::fromMessage(
     Message const& message)
 {
-    if (message.pgn != ID) {
-        throw std::invalid_argument("unexpected PGN ID");
-    }
-    else if (message.size < BYTE_LENGTH) {
-        throw std::invalid_argument("unexpected payload size");
-    }
+    validate_message<EngineFluidLevelAndPressure1>(message);
 
     EngineFluidLevelAndPressure1 result;
     result.time = message.time;
@@ -100,12 +90,8 @@ EngineFluidLevelAndPressure1 EngineFluidLevelAndPressure1::fromMessage(
 EngineFluidLevelAndPressure2 EngineFluidLevelAndPressure2::fromMessage(
     Message const& message)
 {
-    if (message.pgn != ID) {
-        throw std::invalid_argument("unexpected PGN ID");
-    }
-    else if (message.size < BYTE_LENGTH) {
-        throw std::invalid_argument("unexpected payload size");
-    }
+    validate_message<EngineFluidLevelAndPressure2>(message);
+
 
     EngineFluidLevelAndPressure2 result;
     result.time = message.time;
@@ -120,12 +106,7 @@ EngineFluidLevelAndPressure2 EngineFluidLevelAndPressure2::fromMessage(
 
 InletConditions InletConditions::fromMessage(Message const& message)
 {
-    if (message.pgn != ID) {
-        throw std::invalid_argument("unexpected PGN ID");
-    }
-    else if (message.size < BYTE_LENGTH) {
-        throw std::invalid_argument("unexpected payload size");
-    }
+    validate_message<InletConditions>(message);
 
     InletConditions result;
     result.time = message.time;
@@ -143,12 +124,7 @@ InletConditions InletConditions::fromMessage(Message const& message)
 
 EngineHoursAndRevolutions EngineHoursAndRevolutions::fromMessage(Message const& message)
 {
-    if (message.pgn != ID) {
-        throw std::invalid_argument("unexpected PGN ID");
-    }
-    else if (message.size < BYTE_LENGTH) {
-        throw std::invalid_argument("unexpected payload size");
-    }
+    validate_message<EngineHoursAndRevolutions>(message);
 
     EngineHoursAndRevolutions result;
     result.time = message.time;
@@ -161,12 +137,7 @@ EngineHoursAndRevolutions EngineHoursAndRevolutions::fromMessage(Message const& 
 
 VehicleElectricalPower1 VehicleElectricalPower1::fromMessage(Message const& message)
 {
-    if (message.pgn != ID) {
-        throw std::invalid_argument("unexpected PGN ID");
-    }
-    else if (message.size < BYTE_LENGTH) {
-        throw std::invalid_argument("unexpected payload size");
-    }
+    validate_message<VehicleElectricalPower1>(message);
 
     VehicleElectricalPower1 result;
     result.time = message.time;
@@ -181,12 +152,7 @@ VehicleElectricalPower1 VehicleElectricalPower1::fromMessage(Message const& mess
 }
 EngineTemperature1 EngineTemperature1::fromMessage(Message const& message)
 {
-    if (message.pgn != ID) {
-        throw std::invalid_argument("unexpected PGN ID");
-    }
-    else if (message.size < BYTE_LENGTH) {
-        throw std::invalid_argument("unexpected payload size");
-    }
+    validate_message<EngineTemperature1>(message);
 
     EngineTemperature1 result;
     result.time = message.time;
@@ -204,12 +170,7 @@ EngineTemperature1 EngineTemperature1::fromMessage(Message const& message)
 TransportProtocolConnectionManagement TransportProtocolConnectionManagement::fromMessage(
     Message const& message)
 {
-    if (message.pgn != ID) {
-        throw std::invalid_argument("unexpected PGN ID");
-    }
-    else if (message.size < BYTE_LENGTH) {
-        throw std::invalid_argument("unexpected payload size");
-    }
+    validate_message<TransportProtocolConnectionManagement>(message);
 
     TransportProtocolConnectionManagement result;
     result.time = message.time;
