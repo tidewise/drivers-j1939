@@ -1,20 +1,20 @@
 #ifndef J1939_PGNS_HPP
 #define J1939_PGNS_HPP
 
-#include <nmea2000/Message.hpp>
-#include <nmea2000/PGNLibrary.hpp>
+#include <can_common/PGNMessage.hpp>
+#include <can_common/PGNLibrary.hpp>
 
 namespace j1939 {
     namespace pgns {
 
-        nmea2000::PGNLibrary const& getLibrary();
+        can_common::PGNLibrary const& getLibrary();
 
         struct ElectronicEngineController1 {
             static constexpr int BYTE_LENGTH = 8;
             static constexpr int ID = 61444;
 
             static ElectronicEngineController1 fromMessage(
-                nmea2000::Message const& message);
+                can_common::PGNMessage const& message);
 
             base::Time time;
 
@@ -35,7 +35,7 @@ namespace j1939 {
             static constexpr int ID = 61445;
 
             static ElectronicEngineController2 fromMessage(
-                nmea2000::Message const& message);
+                can_common::PGNMessage const& message);
 
             base::Time time;
 
@@ -49,7 +49,7 @@ namespace j1939 {
             static constexpr int BYTE_LENGTH = 8;
             static constexpr int ID = 65266;
 
-            static FuelEconomy fromMessage(nmea2000::Message const& message);
+            static FuelEconomy fromMessage(can_common::PGNMessage const& message);
 
             base::Time time;
 
@@ -65,7 +65,7 @@ namespace j1939 {
             static constexpr int ID = 65263;
 
             static EngineFluidLevelAndPressure1 fromMessage(
-                nmea2000::Message const& message);
+                can_common::PGNMessage const& message);
 
             base::Time time;
 
@@ -82,7 +82,7 @@ namespace j1939 {
             static constexpr int ID = 65243;
 
             static EngineFluidLevelAndPressure2 fromMessage(
-                nmea2000::Message const& message);
+                can_common::PGNMessage const& message);
 
             base::Time time;
 
@@ -95,7 +95,7 @@ namespace j1939 {
             static constexpr int BYTE_LENGTH = 8;
             static constexpr int ID = 65270;
 
-            static InletConditions fromMessage(nmea2000::Message const& message);
+            static InletConditions fromMessage(can_common::PGNMessage const& message);
 
             base::Time time;
 
@@ -112,13 +112,13 @@ namespace j1939 {
             static constexpr int ID = 60416;
 
             static TransportProtocolConnectionManagement fromMessage(
-                nmea2000::Message const& message);
+                can_common::PGNMessage const& message);
 
             base::Time time;
 
             // TODO bam or control_byte?
             uint8_t control_byte;
-            // nmea2000::Message size (bytes)
+            // can_common::PGNMessage size (bytes)
             uint16_t message_size;
             uint8_t number_of_packets;
             uint8_t reserved;
@@ -129,7 +129,7 @@ namespace j1939 {
             static constexpr int ID = 65253;
 
             static EngineHoursAndRevolutions fromMessage(
-                nmea2000::Message const& message);
+                can_common::PGNMessage const& message);
 
             base::Time time;
 
@@ -140,7 +140,8 @@ namespace j1939 {
             static constexpr int BYTE_LENGTH = 8;
             static constexpr int ID = 65271;
 
-            static VehicleElectricalPower1 fromMessage(nmea2000::Message const& message);
+            static VehicleElectricalPower1 fromMessage(
+                can_common::PGNMessage const& message);
 
             base::Time time;
 
@@ -154,7 +155,7 @@ namespace j1939 {
             static constexpr int BYTE_LENGTH = 8;
             static constexpr int ID = 65262;
 
-            static EngineTemperature1 fromMessage(nmea2000::Message const& message);
+            static EngineTemperature1 fromMessage(can_common::PGNMessage const& message);
 
             base::Time time;
 

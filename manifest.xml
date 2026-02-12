@@ -9,6 +9,6 @@
   <depend package="base/cmake" />
   <depend package="base/types" />
   <depend package="drivers/canbus" />
-  <depend package="drivers/nmea2000" />
+  <depend package="drivers/can_common" />
   <test_depend package="google-test" />
 </package>

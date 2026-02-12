@@ -1,26 +1,26 @@
-#ifndef J1939_TRANSPORTSTATE_HPP
-#define J1939_TRANSPORTSTATE_HPP
+#ifndef J1939_TRANSFERSESSION_HPP
+#define J1939_TRANSFERSESSION_HPP
 
-#include <nmea2000/Message.hpp>
-#include <nmea2000/Receiver.hpp>
+#include <can_common/PGNMessage.hpp>
+#include "MessageState.hpp"
 
 namespace j1939 {
     /**
-     * @brief Used to reassembly Transport Protocol (TP) messages
+     * @brief Used to reassembly Transport Protocol Data Transfer (TP.DT) messages
      *
      */
-    struct TransportState {
+    struct TransferSession {
         /**
          * @brief The message to be reassembled
          *
          */
-        nmea2000::Message message;
+        can_common::PGNMessage message;
         /**
          * @brief The number of expected packets
          *
          */
         uint8_t number_of_packets = 0;
-        int current_packets_count = 0;
+        uint8_t current_packets_count = 0;
         /**
          * @brief The current data size in bytes
          *
@@ -31,15 +31,15 @@ namespace j1939 {
          *
          * @param message
          */
-        void fromBAMMessage(nmea2000::Message const& message);
+        void fromBAMMessage(can_common::PGNMessage const& message);
         /**
          * @brief Adds the data of a Data Transfer (DT) message to the data buffer and
          * returns the message state
          *
          * @param message The incoming message
-         * @return nmea2000::Receiver::State The message state
+         * @return MessageState The message state
          */
-        nmea2000::Receiver::State add(nmea2000::Message const& message);
+        MessageState add(can_common::PGNMessage const& message);
     };
 }
 

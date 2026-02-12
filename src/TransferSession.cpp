@@ -1,14 +1,13 @@
-#include "TransportState.hpp"
+#include "TransferSession.hpp"
+#include <can_common/Decode.hpp>
 #include <cstring>
-#include <nmea2000/Decode.hpp>
 #include <j1939/Helpers.hpp>
 
 using namespace j1939;
-using namespace nmea2000;
-using namespace nmea2000::decode;
+using namespace can_common::decode;
 using namespace std;
 
-void TransportState::fromBAMMessage(nmea2000::Message const& bam_message)
+void TransferSession::fromBAMMessage(can_common::Message const& bam_message)
 {
     if (!isBAM(bam_message)) {
         throw invalid_argument("Expected message to be Broadcast Announce Message (BAM)");
@@ -22,7 +21,7 @@ void TransportState::fromBAMMessage(nmea2000::Message const& bam_message)
     std::memset(message.payload, 0, message.size);
 }
 
-nmea2000::Receiver::State TransportState::add(nmea2000::Message const& incoming_msg)
+MessageState TransferSession::add(can_common::Message const& incoming_msg)
 {
     if (!isDataTransfer(incoming_msg)) {
         throw invalid_argument("Expected message to be a Data Transfer message (DT)");
@@ -30,7 +29,7 @@ nmea2000::Receiver::State TransportState::add(nmea2000::Message const& incoming_
     uint8_t sequence_counter = decode8(&incoming_msg.payload[0]);
     current_packets_count += 1;
     if (sequence_counter != current_packets_count) {
-        return Receiver::State::INVALID_SEQUENCE_NUMBER;
+        return MessageState::INVALID_SEQUENCE_NUMBER;
     }
     bool last_message = (sequence_counter == number_of_packets);
     size_t incoming_size =
@@ -38,5 +37,5 @@ nmea2000::Receiver::State TransportState::add(nmea2000::Message const& incoming_
     memcpy(message.payload + current_data_size, incoming_msg.payload + 1, incoming_size);
     current_data_size += incoming_size;
     message.time = base::Time::now();
-    return last_message ? Receiver::State::COMPLETE : Receiver::State::PROCESSED;
+    return last_message ? MessageState::COMPLETE : MessageState::PROCESSED;
 }

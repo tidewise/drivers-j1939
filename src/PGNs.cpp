@@ -1,13 +1,11 @@
-#include <j1939/J1939Receiver.hpp>
 #include <j1939/PGNs.hpp>
-#include <nmea2000/Decode.hpp>
+#include <can_common/Decode.hpp>
 
 using namespace j1939;
 using namespace pgns;
-using namespace nmea2000::decode;
-using namespace nmea2000;
+using namespace can_common::decode;
 
-template <typename PGNType> void validate_message(nmea2000::Message const& message)
+template <typename PGNType> void validate_message(can_common::PGNMessage const& message)
 {
     if (message.pgn != PGNType::ID) {
         throw std::invalid_argument("unexpected PGN ID");
@@ -18,7 +16,7 @@ template <typename PGNType> void validate_message(nmea2000::Message const& messa
 }
 
 ElectronicEngineController1 ElectronicEngineController1::fromMessage(
-    Message const& message)
+    can_common::PGNMessage const& message)
 {
     validate_message<ElectronicEngineController1>(message);
 
@@ -37,7 +35,7 @@ ElectronicEngineController1 ElectronicEngineController1::fromMessage(
 }
 
 ElectronicEngineController2 ElectronicEngineController2::fromMessage(
-    Message const& message)
+    can_common::PGNMessage const& message)
 {
 
     validate_message<ElectronicEngineController2>(message);
@@ -54,7 +52,7 @@ ElectronicEngineController2 ElectronicEngineController2::fromMessage(
     return result;
 }
 
-FuelEconomy FuelEconomy::fromMessage(Message const& message)
+FuelEconomy FuelEconomy::fromMessage(can_common::PGNMessage const& message)
 {
     validate_message<FuelEconomy>(message);
 
@@ -71,7 +69,7 @@ FuelEconomy FuelEconomy::fromMessage(Message const& message)
 }
 
 EngineFluidLevelAndPressure1 EngineFluidLevelAndPressure1::fromMessage(
-    Message const& message)
+    can_common::PGNMessage const& message)
 {
     validate_message<EngineFluidLevelAndPressure1>(message);
 
@@ -90,7 +88,7 @@ EngineFluidLevelAndPressure1 EngineFluidLevelAndPressure1::fromMessage(
 }
 
 EngineFluidLevelAndPressure2 EngineFluidLevelAndPressure2::fromMessage(
-    Message const& message)
+    can_common::PGNMessage const& message)
 {
     validate_message<EngineFluidLevelAndPressure2>(message);
 
@@ -105,7 +103,7 @@ EngineFluidLevelAndPressure2 EngineFluidLevelAndPressure2::fromMessage(
     return result;
 }
 
-InletConditions InletConditions::fromMessage(Message const& message)
+InletConditions InletConditions::fromMessage(can_common::PGNMessage const& message)
 {
     validate_message<InletConditions>(message);
 
@@ -123,7 +121,7 @@ InletConditions InletConditions::fromMessage(Message const& message)
     return result;
 }
 
-EngineHoursAndRevolutions EngineHoursAndRevolutions::fromMessage(Message const& message)
+EngineHoursAndRevolutions EngineHoursAndRevolutions::fromMessage(can_common::PGNMessage const& message)
 {
     validate_message<EngineHoursAndRevolutions>(message);
 
@@ -136,7 +134,7 @@ EngineHoursAndRevolutions EngineHoursAndRevolutions::fromMessage(Message const& 
     return result;
 }
 
-VehicleElectricalPower1 VehicleElectricalPower1::fromMessage(Message const& message)
+VehicleElectricalPower1 VehicleElectricalPower1::fromMessage(can_common::PGNMessage const& message)
 {
     validate_message<VehicleElectricalPower1>(message);
 
@@ -151,7 +149,7 @@ VehicleElectricalPower1 VehicleElectricalPower1::fromMessage(Message const& mess
 
     return result;
 }
-EngineTemperature1 EngineTemperature1::fromMessage(Message const& message)
+EngineTemperature1 EngineTemperature1::fromMessage(can_common::PGNMessage const& message)
 {
     validate_message<EngineTemperature1>(message);
 
@@ -169,7 +167,7 @@ EngineTemperature1 EngineTemperature1::fromMessage(Message const& message)
 }
 
 TransportProtocolConnectionManagement TransportProtocolConnectionManagement::fromMessage(
-    Message const& message)
+    can_common::PGNMessage const& message)
 {
     validate_message<TransportProtocolConnectionManagement>(message);
 
@@ -185,12 +183,12 @@ TransportProtocolConnectionManagement TransportProtocolConnectionManagement::fro
     return result;
 }
 
-nmea2000::PGNLibrary const& j1939::pgns::getLibrary()
+can_common::PGNLibrary const& j1939::pgns::getLibrary()
 {
-    static nmea2000::PGNLibrary library;
+    static can_common::PGNLibrary library;
 
     if (library.empty()) {
-        std::vector<nmea2000::PGNInfo> known_pgns;
+        std::vector<can_common::PGNInfo> known_pgns;
         known_pgns.reserve(10);
         known_pgns.push_back({61444, 8});
         known_pgns.push_back({61445, 8});
@@ -203,7 +201,7 @@ nmea2000::PGNLibrary const& j1939::pgns::getLibrary()
         known_pgns.push_back({65271, 8});
         known_pgns.push_back({65262, 8});
 
-        library = nmea2000::PGNLibrary(known_pgns);
+        library = can_common::PGNLibrary(known_pgns);
     }
 
     return library;
