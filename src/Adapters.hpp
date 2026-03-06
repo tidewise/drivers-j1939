@@ -1,20 +1,45 @@
 #ifndef J1939_ADAPTERS_HPP
 #define J1939_ADAPTERS_HPP
 
-#include <j1939/J1939Receiver.hpp>
+#include <can_common/PGNLibrary.hpp>
+#include <can_common/PGNMessage.hpp>
+#include <canbus/Driver.hpp>
 #include <j1939/PGNs.hpp>
-#include <nmea2000/Adapters.hpp>
+#include <j1939/Receiver.hpp>
+
+namespace canbus {
+    class Driver;
+}
 
 namespace j1939 {
     namespace adapters {
-        class J1939CAN : public nmea2000::adapters::CAN {
+        class Interface {
+        protected:
+            base::Time m_read_timeout = base::Time::fromSeconds(5);
+
         public:
-            J1939CAN(std::string const& name, std::string const& type = "socket")
-                : nmea2000::adapters::CAN(name, type)
-            {
-                m_library = j1939::pgns::getLibrary();
-                m_receiver = std::make_unique<j1939::J1939Receiver>(m_library);
-            }
+            Interface();
+            virtual ~Interface();
+            void setReadTimeout(base::Time const& timeout);
+            virtual can_common::PGNMessage readMessage() = 0;
+        };
+
+        class CAN : public Interface {
+            canbus::Driver* m_driver = nullptr;
+            can_common::PGNLibrary m_library;
+            Receiver m_receiver;
+
+        public:
+            /** Open a CAN interface
+             *
+             * @param type the interface type. One of socket, hico, hico_pci,
+             * net_gateway easy_sync. See drivers/canbus
+             * (https://github.com/rock-drivers/drivers-canbus) for more information
+             */
+            CAN(std::string const& name, std::string const& type = "socket");
+            ~CAN();
+
+            can_common::PGNMessage readMessage();
         };
     }
 }

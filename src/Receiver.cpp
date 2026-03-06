@@ -6,6 +6,10 @@ using namespace j1939;
 using namespace std;
 using namespace can_common;
 
+Receiver::Receiver(PGNLibrary& library)
+    : m_library(library) {
+}
+
 bool keyFound(std::map<uint64_t, j1939::TransferSession>::iterator const& map_iterator,
     map<uint64_t, j1939::TransferSession> const& reassembly_map)
 {
