@@ -1,13 +1,11 @@
 #include <iostream>
-#include <j1939/J1939Receiver.hpp>
-// #include <nmea2000/PGNs.hpp>
+#include <j1939/Receiver.hpp>
 #include <iodrivers_base/Driver.hpp>
 #include <j1939/PGNs.hpp>
 #include <j1939/Adapters.hpp>
-#include <nmea2000/Adapters.hpp>
 
 using namespace std;
-using namespace nmea2000;
+using namespace j1939;
 
 int main(int argc, char const* argv[])
 {
@@ -16,10 +14,7 @@ int main(int argc, char const* argv[])
 
     adapters::Interface* interface = nullptr;
     if (type == "can") {
-        interface = new j1939::adapters::J1939CAN(uri, "socket");
-    }
-    else if (type == "actisense") {
-        throw invalid_argument("Not implemented");
+        interface = new j1939::adapters::CAN(uri, "socket");
     }
     else {
         cerr << "unknown connection type '" << type << "'\n\n";

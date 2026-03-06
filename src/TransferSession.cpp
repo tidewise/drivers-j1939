@@ -7,7 +7,7 @@ using namespace j1939;
 using namespace can_common::decode;
 using namespace std;
 
-void TransferSession::fromBAMMessage(can_common::Message const& bam_message)
+void TransferSession::fromBAMMessage(can_common::PGNMessage const& bam_message)
 {
     if (!isBAM(bam_message)) {
         throw invalid_argument("Expected message to be Broadcast Announce Message (BAM)");
@@ -21,7 +21,7 @@ void TransferSession::fromBAMMessage(can_common::Message const& bam_message)
     std::memset(message.payload, 0, message.size);
 }
 
-MessageState TransferSession::add(can_common::Message const& incoming_msg)
+MessageState TransferSession::add(can_common::PGNMessage const& incoming_msg)
 {
     if (!isDataTransfer(incoming_msg)) {
         throw invalid_argument("Expected message to be a Data Transfer message (DT)");
