@@ -1,19 +1,11 @@
 #include <canbus/Driver.hpp>
 #include <iodrivers_base/Driver.hpp>
-#include <j1939/Adapters.hpp>
+#include <j1939/CAN.hpp>
 
 using namespace base;
-using namespace j1939::adapters;
+using namespace j1939;
 
-Interface::Interface()
-{
-}
-
-Interface::~Interface()
-{
-}
-
-void Interface::setReadTimeout(base::Time const& timeout)
+void CAN::setReadTimeout(base::Time const& timeout)
 {
     m_read_timeout = timeout;
 }
