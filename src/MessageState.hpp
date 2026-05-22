@@ -3,18 +3,13 @@
 
 namespace j1939 {
     enum MessageState {
-        /** Received message has a PGN we don't know about */
+        /** Message PGN is not recognized or is not supported by this handler */
         UNKNOWN_PGN,
-        /** Received message has an unexpected sequence number */
+        /** Transport Protocol Data Transfer message has invalid sequence number */
         INVALID_SEQUENCE_NUMBER,
-        /**
-         * Received message has been processed, and was part of a
-         * multi-message group
-         */
+        /** Transport Protocol Data Transfer segment arrived and was processed */
         PROCESSED,
-        /** A message was fully reassembled. All values above this one
-         * mean 'complete'
-         */
+        /** Message is complete and ready for processing */
         COMPLETE
     };
 }
