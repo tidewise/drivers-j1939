@@ -166,23 +166,6 @@ EngineTemperature1 EngineTemperature1::fromMessage(can_common::PGNMessage const&
     return result;
 }
 
-TransportProtocolConnectionManagement TransportProtocolConnectionManagement::fromMessage(
-    can_common::PGNMessage const& message)
-{
-    validate_message<TransportProtocolConnectionManagement>(message);
-
-    TransportProtocolConnectionManagement result;
-    result.time = message.time;
-
-    result.control_byte = decode8(&message.payload[0]);
-    result.message_size = decode16(&message.payload[1]);
-    result.number_of_packets = decode8(&message.payload[3]);
-    result.reserved = decode8(&message.payload[4]);
-    result.pgn = (decode32(&message.payload[5])) & 0x00FFFFFF;
-
-    return result;
-}
-
 can_common::PGNLibrary const& j1939::pgns::getLibrary()
 {
     static can_common::PGNLibrary library;

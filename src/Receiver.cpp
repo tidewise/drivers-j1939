@@ -76,7 +76,7 @@ std::pair<MessageState, can_common::PGNMessage> Receiver::process(PGNMessage con
         return make_pair(MessageState::UNKNOWN_PGN, msg);
     }
     else if (isDataTransfer(msg)) {
-        processDTMessage(m_reassembly, msg, key, it);
+        return processDTMessage(m_reassembly, msg, key, it);
     }
     return make_pair(MessageState::COMPLETE, msg);
 }

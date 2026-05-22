@@ -107,23 +107,6 @@ namespace j1939 {
             uint16_t exhaust_gas_temperature;
             uint8_t coolant_filter_differential_pressure;
         };
-        struct TransportProtocolConnectionManagement {
-            static constexpr int BYTE_LENGTH = 8;
-            static constexpr int ID = 60416;
-
-            static TransportProtocolConnectionManagement fromMessage(
-                can_common::PGNMessage const& message);
-
-            base::Time time;
-
-            // TODO bam or control_byte?
-            uint8_t control_byte;
-            // can_common::PGNMessage size (bytes)
-            uint16_t message_size;
-            uint8_t number_of_packets;
-            uint8_t reserved;
-            uint32_t pgn;
-        };
         struct EngineHoursAndRevolutions {
             static constexpr int BYTE_LENGTH = 8;
             static constexpr int ID = 65253;
