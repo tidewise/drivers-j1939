@@ -47,8 +47,7 @@ TEST_F(PGNsTest, ir_parses_pgn_65266)
     ASSERT_EQ(1000, parsed.fuel_rate);
     ASSERT_EQ(4096, parsed.instantaneous_fuel_economy);
     ASSERT_EQ(8192, parsed.average_fuel_economy);
-    ASSERT_EQ(100, parsed.throttle_position_1);
-    ASSERT_EQ(200, parsed.throttle_position_2);
+    ASSERT_EQ(100, parsed.throttle_position);
 }
 
 TEST_F(PGNsTest, ir_parses_pgn_65263)

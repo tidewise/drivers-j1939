@@ -62,8 +62,7 @@ FuelEconomy FuelEconomy::fromMessage(can_common::PGNMessage const& message)
     result.fuel_rate = decode16(&message.payload[0]);
     result.instantaneous_fuel_economy = decode16(&message.payload[2]);
     result.average_fuel_economy = decode16(&message.payload[4]);
-    result.throttle_position_1 = decode8(&message.payload[6]);
-    result.throttle_position_2 = decode8(&message.payload[7]);
+    result.throttle_position = decode8(&message.payload[6]);
 
     return result;
 }
@@ -134,11 +133,11 @@ EngineHoursAndRevolutions EngineHoursAndRevolutions::fromMessage(can_common::PGN
     return result;
 }
 
-VehicleElectricalPower1 VehicleElectricalPower1::fromMessage(can_common::PGNMessage const& message)
+VehicleElectricalPower VehicleElectricalPower::fromMessage(can_common::PGNMessage const& message)
 {
-    validate_message<VehicleElectricalPower1>(message);
+    validate_message<VehicleElectricalPower>(message);
 
-    VehicleElectricalPower1 result;
+    VehicleElectricalPower result;
     result.time = message.time;
 
     result.net_battery_current = decode8(&message.payload[0]);
