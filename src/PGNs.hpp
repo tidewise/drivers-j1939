@@ -22,7 +22,6 @@ namespace j1939 {
             static ElectronicEngineController1 fromMessage(
                 can_common::PGNMessage const& message);
 
-            /** @brief Reception timestamp. */
             base::Time time;
 
             /**
@@ -50,7 +49,7 @@ namespace j1939 {
             uint16_t engine_speed;
 
             /**
-             * @brief Source address of controlling device.
+             * @brief Source address of the device controlling the engine.
              * @note Unit: Address (0-255) | SPN: 1483
              */
             uint8_t source_address;
@@ -81,20 +80,24 @@ namespace j1939 {
             base::Time time;
 
             /**
-             * @brief Operator selected gear.
-             * @note Unit: Gear | Offset: -125 (0 = Neutral) | SPN: 524
+             * @brief Selected gear during the current shift or the next pending shift
+             * @note Unit: Gear | Offset: -125 (0 = Neutral) | SPN: 524 |
+             * Negative values are reverse gears, positive values are forward gears, zero
+             * is neutral . 251 (0xFB) is park
              */
             uint8_t selected_gear;
 
             /**
-             * @brief Transmission gear ratio.
+             * @brief Actual ratio of input shaft speed to output shaft speed.
              * @note Unit: Ratio | Scaling: 0.001/bit | Offset: 0 | SPN: 526
              */
             uint16_t actual_gear_ratio;
 
             /**
-             * @brief Currently engaged gear.
-             * @note Unit: Gear | Offset: -125 | SPN: 523
+             * @brief Currently engaged gear or last gear engaged.
+             * @note Unit: Gear | Offset: -125 | SPN: 523 |
+             * Negative values are reverse gears, positive values are forward gears, zero
+             * is neutral . 251 (0xFB) is park
              */
             uint8_t current_gear;
 
@@ -123,25 +126,25 @@ namespace j1939 {
             base::Time time;
 
             /**
-             * @brief Engine fuel consumption rate.
+             * @brief Amount of fuel consumed by engine per unit of time.
              * @note Unit: L/h | Scaling: 0.05 L/h per bit | Offset: 0 | SPN: 183
              */
             uint16_t fuel_rate;
 
             /**
-             * @brief Instantaneous economy at current speed.
-             * @note Unit: km/L | Scaling: 1/512 km/L per bit | Offset: 0 | SPN: 184
+             * @brief Current fuel economy at current speed.
+             * @note Unit: km/Kg | Scaling: 1/512 km/Kg per bit | Offset: 0 | SPN: 184
              */
             uint16_t instantaneous_fuel_economy;
 
             /**
-             * @brief Average economy over trip/interval.
-             * @note Unit: km/L | Scaling: 1/512 km/L per bit | Offset: 0 | SPN: 185
+             * @brief Average of instantaneous fuel economy over trip/interval.
+             * @note Unit: km/Kg | Scaling: 1/512 km/Kg per bit | Offset: 0 | SPN: 185
              */
             uint16_t average_fuel_economy;
 
             /**
-             * @brief Primary throttle position.
+             * @brief Position of the valve used to regulate the supply of a fluid
              * @note Unit: % | Scaling: 0.4%/bit | Offset: 0 | SPN: 51
              */
             uint8_t throttle_position;
@@ -160,43 +163,43 @@ namespace j1939 {
             base::Time time;
 
             /**
-             * @brief Pressure at fuel delivery pump.
+             * @brief Gage pressure of fuel as delivered from supply to the injection pump
              * @note Unit: kPa | Scaling: 4 kPa/bit | Offset: 0 | SPN: 94
              */
             uint8_t fuel_delivery_pressure;
 
             /**
-             * @brief Crankcase blow-by pressure.
+             * @brief Differential crankcase blow-by pressure.
              * @note Unit: kPa | Scaling: 0.05 kPa/bit | Offset: 0 | SPN: 22
              */
             uint8_t extended_crankcase_blow_by_pressure;
 
             /**
-             * @brief Engine oil volume.
+             * @brief Ratio of sump oil volume to maximum required volume
              * @note Unit: % | Scaling: 0.4%/bit | Offset: 0 | SPN: 98
              */
             uint8_t engine_oil_level;
 
             /**
-             * @brief Engine oil pressure gauge.
+             * @brief Gage pressure of oil in engine lubrification system
              * @note Unit: kPa | Scaling: 4 kPa/bit | Offset: 0 | SPN: 100
              */
             uint8_t engine_oil_pressure;
 
             /**
-             * @brief Absolute crankcase pressure.
+             * @brief Cage pressure inside engine crankcase.
              * @note Unit: kPa | Scaling: 0.0078125 kPa/bit | Offset: -128 kPa | SPN: 101
              */
             uint16_t crankcase_pressure;
 
             /**
-             * @brief Engine coolant system pressure.
+             * @brief Cage pressure of liquid found in engine colling system
              * @note Unit: kPa | Scaling: 2 kPa/bit | Offset: 0 | SPN: 109
              */
             uint8_t coolant_pressure;
 
             /**
-             * @brief Engine coolant volume.
+             * @brief Ratio of actual coolant liquid volume to total cooling system volume
              * @note Unit: % | Scaling: 0.4%/bit | Offset: 0 | SPN: 111
              */
             uint8_t coolant_level;
@@ -215,26 +218,26 @@ namespace j1939 {
             base::Time time;
 
             /**
-             * @brief Control pressure for fuel injection.
-             * @note Unit: kPa | Scaling: 16 kPa/bit | Offset: 0 | SPN: 164
+             * @brief Gage pressure of the engine oil in fuel injection
+             * @note Unit: kPa | Scaling: 1/256 MPa/bit | Offset: 0 | SPN: 164
              */
             uint16_t injection_control_pressure;
 
             /**
-             * @brief Pressure in fuel metering rail 1.
-             * @note Unit: kPa | Scaling: 16 kPa/bit | Offset: 0 | SPN: 157
+             * @brief Gage ressure in fuel metering rail 1.
+             * @note Unit: kPa | Scaling: 1/256 MPa/bit | Offset: 0 | SPN: 157
              */
             uint16_t injector_metering_rail_1_pressure;
 
             /**
              * @brief Pressure in fuel timing rail 1.
-             * @note Unit: kPa | Scaling: 16 kPa/bit | Offset: 0 | SPN: 156
+             * @note Unit: kPa | Scaling: 1/256 MPa/bit | Offset: 0 | SPN: 156
              */
             uint16_t injector_timing_rail_1_pressure;
 
             /**
              * @brief Pressure in fuel metering rail 2.
-             * @note Unit: kPa | Scaling: 16 kPa/bit | Offset: 0 | SPN: 1349
+             * @note Unit: kPa | Scaling: 1/256 MPa/bit | Offset: 0 | SPN: 1349
              */
             uint16_t injector_metering_rail_2_pressure;
         };
@@ -251,25 +254,27 @@ namespace j1939 {
             base::Time time;
 
             /**
-             * @brief Inlet pressure to particulate trap.
+             * @brief Exhaust back pressure as a result of particle accumulation on filter
+             * media placed in the exhaust stream
              * @note Unit: kPa | Scaling: 0.5 kPa/bit | Offset: 0 | SPN: 81
              */
             uint8_t particulate_trap_inlet_pressure;
 
             /**
-             * @brief Intake manifold boost pressure.
+             * @brief Air gage pressure measured downstream in the compressor discharge of
+             * the turbocharger
              * @note Unit: kPa | Scaling: 2 kPa/bit | Offset: 0 | SPN: 102
              */
             uint8_t boost_pressure;
 
             /**
-             * @brief Intake manifold air temperature.
+             * @brief Pre-combustion intake manifold air temperature.
              * @note Unit: °C | Scaling: 1 °C/bit | Offset: -40 °C | SPN: 105
              */
             uint8_t intake_manifold_1_temperature;
 
             /**
-             * @brief Engine inlet air pressure (barometric).
+             * @brief Absolute air pressure at inlet to intake mainfold or air box
              * @note Unit: kPa | Scaling: 2 kPa/bit | Offset: 0 | SPN: 106
              */
             uint8_t air_inlet_pressure;
@@ -306,13 +311,13 @@ namespace j1939 {
             base::Time time;
 
             /**
-             * @brief Cumulative engine operation time.
+             * @brief Accumulated time of operation of engine.
              * @note Unit: hr | Scaling: 0.05 hr/bit | Offset: 0 | SPN: 247
              */
             uint32_t total_engine_hours;
 
             /**
-             * @brief Cumulative engine crankshaft rotations.
+             * @brief Cumulative engine crankshaft revolutions during its operation.
              * @note Unit: rev | Scaling: 1000 rev/bit | Offset: 0 | SPN: 249
              */
             uint32_t total_engine_revolutions;
@@ -331,7 +336,7 @@ namespace j1939 {
             base::Time time;
 
             /**
-             * @brief Current flow at battery.
+             * @brief Net flow of electrical into/out of the battery
              * @note Unit: A | Scaling: 1 A/bit | Offset: -125 A | SPN: 114
              */
             uint8_t net_battery_current;
@@ -343,19 +348,19 @@ namespace j1939 {
             uint8_t alternator_current;
 
             /**
-             * @brief Potential at alternator.
+             * @brief Electical potential at alternator.
              * @note Unit: V | Scaling: 0.05 V/bit | Offset: 0 | SPN: 167
              */
             uint16_t alternator_potential;
 
             /**
-             * @brief General electrical potential.
+             * @brief Electrical potential of the battery.
              * @note Unit: V | Scaling: 0.05 V/bit | Offset: 0 | SPN: 168
              */
             uint16_t electrical_potential;
 
             /**
-             * @brief Potential measured at battery.
+             * @brief Electrical potential measured at the input of the ECU.
              * @note Unit: V | Scaling: 0.05 V/bit | Offset: 0 | SPN: 158
              */
             uint16_t battery_potential;
@@ -379,19 +384,19 @@ namespace j1939 {
             uint8_t engine_coolant_temperature;
 
             /**
-             * @brief Fuel temperature at inlet.
+             * @brief Temperature of fuel entering injectors.
              * @note Unit: °C | Scaling: 1 °C/bit | Offset: -40 °C | SPN: 174
              */
             uint8_t fuel_temperature;
 
             /**
-             * @brief Engine oil temperature.
+             * @brief Temperature of the engine lubrificant.
              * @note Unit: °C | Scaling: 0.03125 °C/bit | Offset: -273 °C | SPN: 175
              */
             uint16_t engine_oil_temperature;
 
             /**
-             * @brief Turbocharger oil temperature.
+             * @brief Turbocharger lubrificant temperature.
              * @note Unit: °C | Scaling: 0.03125 °C/bit | Offset: -273 °C | SPN: 176
              */
             uint16_t turbo_oil_temperature;
@@ -403,7 +408,8 @@ namespace j1939 {
             uint8_t engine_intercooler_temperature;
 
             /**
-             * @brief Intercooler thermostat opening.
+             * @brief Thermostat current position used to regulate the engine intercooler
+             * temperature.
              * @note Unit: % | Scaling: 0.4%/bit | Offset: 0 | SPN: 1134
              */
             uint8_t engine_intercooler_thermostat_opening;
