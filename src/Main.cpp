@@ -24,10 +24,10 @@ int main(int argc, char const* argv[])
 
     string uri = argv[1];
 
-    auto can_interface = new j1939::CAN(uri, "socket");
+    j1939::CAN can_interface(uri, "socket");
     while (true) {
         try {
-            auto msg = can_interface->readMessage();
+            auto msg = can_interface.readMessage();
             cout << "msg.time: " << msg.time << " " << "msg.pgn: " << msg.pgn << " "
                  << "msg.priority: " << msg.priority << " " << "msg.size: " << msg.size
                  << endl;
