@@ -20,7 +20,7 @@ TEST_F(PGNsTest, ir_parses_pgn_61444)
 {
     auto parsed = parse_message<ElectronicEngineController1>(
         {0x01, 0x50, 0x5A, 0x40, 0x1F, 0x0A, 0x01, 0x51});
-    ASSERT_EQ(1, parsed.engine_torque_mode);
+    ASSERT_EQ(EngineTorqueMode::ACCELERATOR_PEDAL, parsed.engine_torque_mode);
     ASSERT_EQ(80, parsed.drivers_demand_engine);
     ASSERT_EQ(90, parsed.actual_engine);
     ASSERT_EQ(8000, parsed.engine_speed);

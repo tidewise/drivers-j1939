@@ -13,6 +13,28 @@ namespace j1939 {
         can_common::PGNLibrary const& getLibrary();
 
         /**
+         * @brief Engine Torque Mode (SPN 899)
+         */
+        enum class EngineTorqueMode : uint8_t {
+            LOW_IDLE_GOVERNOR = 0b0000,
+            ACCELERATOR_PEDAL = 0b0001,
+            CRUISE_CONTROL = 0b0010,
+            PTO_GOVERNOR = 0b0011,
+            ROAD_SPEED_GOVERNOR = 0b0100,
+            ASR_CONTROL = 0b0101,
+            TRANSMISSION_CONTROL = 0b0110,
+            ABS_CONTROL = 0b0111,
+            TORQUE_LIMITING = 0b1000,
+            HIGH_SPEED_GOVERNOR = 0b1001,
+            BRAKING_SYSTEM = 0b1010,
+            REMOTE_ACCELERATOR = 0b1011,
+            SERVICE_TOOL = 0b1100,
+            OTHER = 0b1101,
+            RESERVED = 0b1110,
+            NOT_AVAILABLE = 0b1111
+        };
+
+        /**
          * @brief Electronic Engine Controller 1 (EEC1) - PGN 61444
          */
         struct ElectronicEngineController1 {
@@ -28,7 +50,7 @@ namespace j1939 {
              * @brief State of engine torque control system.
              * @note Unit: Control State (Bit-mapped) | SPN: 899
              */
-            uint8_t engine_torque_mode;
+            EngineTorqueMode engine_torque_mode;
 
             /**
              * @brief Driver's requested torque.

@@ -23,7 +23,7 @@ ElectronicEngineController1 ElectronicEngineController1::fromMessage(
     ElectronicEngineController1 result;
     result.time = message.time;
 
-    result.engine_torque_mode = (decode8(&message.payload[0]) & 0xf);
+    result.engine_torque_mode = static_cast<EngineTorqueMode>(decode8(&message.payload[0]) & 0xf);
     result.drivers_demand_engine = decode8(&message.payload[1]);
     result.actual_engine = decode8(&message.payload[2]);
     result.engine_speed = decode16(&message.payload[3]);
