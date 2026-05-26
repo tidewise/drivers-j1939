@@ -7,20 +7,15 @@ using namespace std;
 using namespace can_common;
 
 Receiver::Receiver(PGNLibrary& library)
-    : m_library(library) {
-}
-
-bool keyFound(std::map<uint64_t, j1939::TransferSession>::iterator const& map_iterator,
-    map<uint64_t, j1939::TransferSession> const& reassembly_map)
+    : m_library(library)
 {
-    return map_iterator != reassembly_map.end();
 }
 
 void deleteOldIncompleteMessages(
     std::map<uint64_t, j1939::TransferSession>::iterator const& map_iterator,
     map<uint64_t, j1939::TransferSession>& reassembly_map)
 {
-    if (keyFound(map_iterator, reassembly_map)) {
+    if (map_iterator != reassembly_map.end()) {
         reassembly_map.erase(map_iterator);
         // TODO: Increment lost data statistics
     }
@@ -43,7 +38,7 @@ std::pair<MessageState, can_common::PGNMessage> processDTMessage(
     uint64_t key,
     std::map<uint64_t, j1939::TransferSession>::iterator const& map_iterator)
 {
-    if (!keyFound(map_iterator, reassembly_map)) {
+    if (map_iterator == reassembly_map.end()) {
         return make_pair(MessageState::INVALID_SEQUENCE_NUMBER, message);
     }
     auto state = map_iterator->second.add(message);
