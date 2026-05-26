@@ -28,7 +28,7 @@ ElectronicEngineController1 ElectronicEngineController1::fromMessage(
     result.actual_engine = decode8(&message.payload[2]);
     result.engine_speed = decode16(&message.payload[3]);
     result.source_address = decode8(&message.payload[5]);
-    result.engine_starter_mode = decode8(&message.payload[6]) & 0x0F;
+    result.engine_starter_mode = static_cast<EngineStarterMode>(decode8(&message.payload[6]) & 0x0F);
     result.engine_demand = decode8(&message.payload[7]);
 
     return result;

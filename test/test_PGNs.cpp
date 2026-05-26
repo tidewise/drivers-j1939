@@ -25,7 +25,7 @@ TEST_F(PGNsTest, ir_parses_pgn_61444)
     ASSERT_EQ(90, parsed.actual_engine);
     ASSERT_EQ(8000, parsed.engine_speed);
     ASSERT_EQ(10, parsed.source_address);
-    ASSERT_EQ(1, parsed.engine_starter_mode);
+    ASSERT_EQ(EngineStarterMode::STARTER_ACTIVE_GEAR_NOT_ENGAGED, parsed.engine_starter_mode);
     ASSERT_EQ(81, parsed.engine_demand);
 }
 

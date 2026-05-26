@@ -35,6 +35,28 @@ namespace j1939 {
         };
 
         /**
+         * @brief Engine Starter Mode (SPN 1675)
+         */
+        enum class EngineStarterMode : uint8_t {
+            START_NOT_REQUESTED = 0b0000,
+            STARTER_ACTIVE_GEAR_NOT_ENGAGED = 0b0001,
+            STARTER_ACTIVE_GEAR_ENGAGED = 0b0010,
+            START_FINISHED = 0b0011,
+            STARTER_INHIBITED_ENGINE_ALREADY_RUNNING = 0b0100,
+            STARTER_INHIBITED_ENGINE_NOT_READY = 0b0101,
+            STARTER_INHIBITED_DRIVELINE_ENGAGED = 0b0110,
+            STARTER_INHIBITED_ACTIVE_IMMOBILIZER = 0b0111,
+            STARTER_INHIBITED_STARTER_OVER_TEMP = 0b1000,
+            RESERVED_9 = 0b1001,
+            RESERVED_10 = 0b1010,
+            RESERVED_11 = 0b1011,
+            STARTER_INHIBITED_REASON_UNKNOWN = 0b1100,
+            ERROR_LEGACY = 0b1101,
+            ERROR = 0b1110,
+            NOT_AVAILABLE = 0b1111
+        };
+
+        /**
          * @brief Electronic Engine Controller 1 (EEC1) - PGN 61444
          */
         struct ElectronicEngineController1 {
@@ -80,7 +102,7 @@ namespace j1939 {
              * @brief Status of engine starter.
              * @note Unit: State (Bit-mapped) | SPN: 1675
              */
-            uint8_t engine_starter_mode;
+            EngineStarterMode engine_starter_mode;
 
             /**
              * @brief Engine torque demand.
@@ -105,7 +127,7 @@ namespace j1939 {
              * @brief Selected gear during the current shift or the next pending shift
              * @note Unit: Gear | Offset: -125 (0 = Neutral) | SPN: 524 |
              * Negative values are reverse gears, positive values are forward gears, zero
-             * is neutral . 251 (0xFB) is park
+             * is neutral. 251 (0xFB) is park
              */
             uint8_t selected_gear;
 
