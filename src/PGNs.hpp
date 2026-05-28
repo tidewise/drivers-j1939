@@ -15,7 +15,7 @@ namespace j1939 {
         /**
          * @brief Engine Torque Mode (SPN 899)
          */
-        enum class EngineTorqueMode : uint8_t {
+        enum EngineTorqueMode : uint8_t {
             LOW_IDLE_GOVERNOR = 0b0000,
             ACCELERATOR_PEDAL = 0b0001,
             CRUISE_CONTROL = 0b0010,
@@ -31,13 +31,13 @@ namespace j1939 {
             SERVICE_TOOL = 0b1100,
             OTHER = 0b1101,
             RESERVED = 0b1110,
-            NOT_AVAILABLE = 0b1111
+            ENGINE_TORQUE_MODE_NOT_AVAILABLE = 0b1111
         };
 
         /**
          * @brief Engine Starter Mode (SPN 1675)
          */
-        enum class EngineStarterMode : uint8_t {
+        enum EngineStarterMode : uint8_t {
             START_NOT_REQUESTED = 0b0000,
             STARTER_ACTIVE_GEAR_NOT_ENGAGED = 0b0001,
             STARTER_ACTIVE_GEAR_ENGAGED = 0b0010,
@@ -53,7 +53,7 @@ namespace j1939 {
             STARTER_INHIBITED_REASON_UNKNOWN = 0b1100,
             ERROR_LEGACY = 0b1101,
             ERROR = 0b1110,
-            NOT_AVAILABLE = 0b1111
+            ENGINE_STARTER_MODE_NOT_AVAILABLE = 0b1111
         };
 
         /**
