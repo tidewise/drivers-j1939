@@ -11,6 +11,8 @@ void usage(ostream& stream)
 {
     cerr << "usage: j1939_ctl URI\n";
     cerr << "\n";
+    cerr << "Set up a CAN interface and print received J1939 PGN information.\n";
+    cerr << "Arguments:\n";
     cerr << "URI is the can interface, eg.: can0\n";
     cerr << flush;
 }
