@@ -30,9 +30,10 @@ int main(int argc, char const* argv[])
     while (true) {
         try {
             auto msg = can_interface.readMessage();
-            cout << "msg.time: " << msg.time << " " << "msg.pgn: " << msg.pgn << " "
-                 << "msg.priority: " << msg.priority << " " << "msg.size: " << msg.size
-                 << endl;
+            cout << "msg.time: " << msg.time << " "
+                 << "msg.pgn: " << msg.pgn << " "
+                 << "msg.priority: " << msg.priority << " "
+                 << "msg.size: " << msg.size << endl;
         }
         catch (iodrivers_base::TimeoutError&) {
             cout << "TIMEOUT" << endl;

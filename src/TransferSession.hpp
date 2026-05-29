@@ -1,8 +1,8 @@
 #ifndef J1939_TRANSFERSESSION_HPP
 #define J1939_TRANSFERSESSION_HPP
 
-#include <can_common/PGNMessage.hpp>
 #include "MessageState.hpp"
+#include <can_common/PGNMessage.hpp>
 
 namespace j1939 {
     /**

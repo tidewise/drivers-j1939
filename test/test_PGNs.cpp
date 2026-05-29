@@ -1,15 +1,16 @@
-#include <gtest/gtest.h>
-#include "j1939/PGNs.hpp"
 #include "j1939/MessageState.hpp"
-#include <can_common/PGNMessage.hpp>
-#include <vector>
+#include "j1939/PGNs.hpp"
 #include <algorithm>
+#include <can_common/PGNMessage.hpp>
+#include <gtest/gtest.h>
+#include <vector>
 
 using namespace j1939;
 using namespace pgns;
 using namespace std;
 
-struct PGNsTest : public ::testing::Test {};
+struct PGNsTest : public ::testing::Test {
+};
 
 template <typename M>
 M parse_message(vector<uint8_t> const& payload,
@@ -25,7 +26,8 @@ TEST_F(PGNsTest, ir_parses_pgn_61444)
     ASSERT_EQ(90, parsed.actual_engine);
     ASSERT_EQ(8000, parsed.engine_speed);
     ASSERT_EQ(10, parsed.source_address);
-    ASSERT_EQ(EngineStarterMode::STARTER_ACTIVE_GEAR_NOT_ENGAGED, parsed.engine_starter_mode);
+    ASSERT_EQ(EngineStarterMode::STARTER_ACTIVE_GEAR_NOT_ENGAGED,
+        parsed.engine_starter_mode);
     ASSERT_EQ(81, parsed.engine_demand);
 }
 

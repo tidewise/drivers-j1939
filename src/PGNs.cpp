@@ -1,5 +1,5 @@
-#include <j1939/PGNs.hpp>
 #include <can_common/Decode.hpp>
+#include <j1939/PGNs.hpp>
 
 using namespace j1939;
 using namespace pgns;
@@ -23,12 +23,14 @@ ElectronicEngineController1 ElectronicEngineController1::fromMessage(
     ElectronicEngineController1 result;
     result.time = message.time;
 
-    result.engine_torque_mode = static_cast<EngineTorqueMode>(decode8(&message.payload[0]) & 0xf);
+    result.engine_torque_mode =
+        static_cast<EngineTorqueMode>(decode8(&message.payload[0]) & 0xf);
     result.drivers_demand_engine = decode8(&message.payload[1]);
     result.actual_engine = decode8(&message.payload[2]);
     result.engine_speed = decode16(&message.payload[3]);
     result.source_address = decode8(&message.payload[5]);
-    result.engine_starter_mode = static_cast<EngineStarterMode>(decode8(&message.payload[6]) & 0x0F);
+    result.engine_starter_mode =
+        static_cast<EngineStarterMode>(decode8(&message.payload[6]) & 0x0F);
     result.engine_demand = decode8(&message.payload[7]);
 
     return result;
@@ -120,7 +122,8 @@ InletConditions InletConditions::fromMessage(can_common::PGNMessage const& messa
     return result;
 }
 
-EngineHoursAndRevolutions EngineHoursAndRevolutions::fromMessage(can_common::PGNMessage const& message)
+EngineHoursAndRevolutions EngineHoursAndRevolutions::fromMessage(
+    can_common::PGNMessage const& message)
 {
     validate_message<EngineHoursAndRevolutions>(message);
 
@@ -133,7 +136,8 @@ EngineHoursAndRevolutions EngineHoursAndRevolutions::fromMessage(can_common::PGN
     return result;
 }
 
-VehicleElectricalPower VehicleElectricalPower::fromMessage(can_common::PGNMessage const& message)
+VehicleElectricalPower VehicleElectricalPower::fromMessage(
+    can_common::PGNMessage const& message)
 {
     validate_message<VehicleElectricalPower>(message);
 
